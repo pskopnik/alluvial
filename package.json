@@ -1,0 +1,11 @@
+{
+  "name": "alluvial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com/pskopnik/alluvial.git",
+  "author": "Paul Skopnik <paul+github@skopnik.me>",
+  "license": "MIT",
+  "dependencies": {
+    "d3-sankey": "^0.7.1"
+  }
+}
