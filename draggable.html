@@ -20,9 +20,7 @@ var svg = d3.select("svg"),
 		width = +svg.attr("width"),
 		height = +svg.attr("height");
 
-var formatNumber = d3.format(",.0f"),
-		format = function(d) { return formatNumber(d) + " TWh"; },
-		color = d3.scaleOrdinal(d3.schemeCategory10);
+var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 var sankey = d3.sankey()
 		.nodeId(function(d) { return d.spec; })
@@ -94,7 +92,6 @@ d3.json("data.json", function(error, data) {
 	function dragmove(d) {
 		d3.select(this).attr("transform", "translate(" + d.x0 + "," + (d.y0 = Math.max(0, Math.min(height - (d.y1 - d.y0), d3.event.y))) + ")");
 		sankey.update(graph);
-		console.log(d);
 		link.attr("d", d3.sankeyLinkHorizontal());
 	}
 
