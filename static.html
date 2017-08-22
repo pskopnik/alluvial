@@ -13,7 +13,12 @@ d3.json("data.json", function(error, data) {
 
 	svg.attr("width", (width = 100 * d3.max(data.nodes, function (d) { return d.rank; })));
 
-	var color = d3.scaleOrdinal(d3.schemeCategory10);
+	var hasClusters = false;
+	if ("clusters" in data) {
+		hasClusters = true;
+		var color = d3.scaleSequential(d3.interpolateRainbow)
+			.domain([0, data.clusters.number]);
+	}
 
 	var sankey = d3.sankey()
 			.nodeId(function(d) { return d.spec; })
@@ -58,7 +63,7 @@ d3.json("data.json", function(error, data) {
 			.attr("y", function(d) { return d.y0; })
 			.attr("height", function(d) { return d.y1 - d.y0; })
 			.attr("width", function(d) { return d.x1 - d.x0; })
-			.attr("fill", function(d) { return (d.spec[0] == "p")? color("asdf") : "#000"; })
+			.attr("fill", function(d) { return (d.spec[0] == "p")? (hasClusters)? color(d.cluster) : "#1f77b4" : "#000"; })
 			.attr("fill-opacity", function(d) { return (d.spec[0] == "p")? null : "0.2"; })
 			.attr("stroke", "#000");
 
